@@ -25,8 +25,7 @@ function Dashboard({
     ethereum: 15.73,
     usdc: 25000
   });
-
-  const cryptoAssets = [
+  const Tokens = [
     { 
       name: 'Bitcoin', 
       symbol: 'BTC', 
@@ -55,22 +54,59 @@ function Dashboard({
       borderColor: 'border-purple-500'
     }
   ];
+  
 
 const  navigate = useNavigate()
+
+const items = [
+  { label: 'Transfer', key: '1' ,children: <>Transfer</>},
+  { label: 'Tokens', key: '2',children: <>{Tokens ? (
+    <>
+    <List
+      bordered
+      itemLayout='Horizontal'
+      dataSource={Tokens}/>
+    </>  ):
+    (
+      <></>
+    )}
+    </> 
+    },
+  { label: 'NFTs', key: '3' ,children: <>NFTs</>},
+];
+
 function logout(){
   setSeedPhrase(null)
   setwallet(null)
   navigate('/')
 }
   return (
-    <div className="bg-white max-w-md mx-auto shadow-xl rounded-2xl p-6 font-sans border-2 border-purple-50">
-      <div  >
-        <Button onClick={logout}>Logout <LogoutOutlined/></Button>
-        <div>{wallet}</div>
-        {seedPhrase}
-      </div>
-    
-    </div>
+    <div
+    className="flex items-center justify-center h-screen bg-gray-100"
+    style={{
+        textAlign: 'center',
+        padding: '20px',
+    }}
+>
+            <div className="space-y-5 mb-32 p-8 bg-white shadow-lg rounded-lg"
+            style={{
+                maxWidth: '400px',
+                width: '90%',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                transition: 'box-shadow 0.3s ease',
+            }}>
+              <div  >
+                <Button onClick={logout}>Logout <LogoutOutlined/></Button>
+              </div>
+
+              <div className='' >Wallet</div>
+              <Tooltip title={wallet}>
+                <div>{wallet.slice(0,4)}....{wallet.slice(38)}</div>
+              </Tooltip>
+              <Divider></Divider>
+              <Tabs defaultActiveKey='1' items={items}></Tabs>
+            </div>
+        </div>
   );
 };
 

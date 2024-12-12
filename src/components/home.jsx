@@ -12,7 +12,7 @@ function Home(){
       {/* Main Content */}
       <main className="flex-grow flex flex-col justify-center items-center px-4 py-12">
         <div className="w-full max-w-md text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-8">Welcome to CryptoVault</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">Welcome to Flash Wallet</h1>
           
           <div className="space-y-4">
             <button 
