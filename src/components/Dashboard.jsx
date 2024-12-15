@@ -10,69 +10,117 @@ import {
   Button,
  } from 'antd';
 
- import { LogoutOutlined } from '@ant-design/icons';
+ import { LogoutOutlined ,QuestionCircleOutlined} from '@ant-design/icons';
  import { useNavigate } from 'react-router-dom';
 
+
+ 
+
+const Tokens = [
+  { 
+    name: 'Bitcoin', 
+    symbol: 'BTC', 
+    balance: 10005635645645,
+    decimals: 9,
+  },
+  { 
+    name: 'Ethereum', 
+    symbol: 'ETH', 
+    amount: 15.73, 
+    balance: 104000,
+    decimals: 3,
+  },
+  { 
+    name: 'USDC', 
+    symbol: 'USDC', 
+    balance: 10000,
+    decimals: 2,
+  }
+];
+
+
+const nfts = ["https://stickers.freenft.com/stickers/heroes-and-villains/image/4545.json",
+              "https://stickers.freenft.com/stickers/billion/image/145399.png"
+]
+const logo = <QuestionCircleOutlined/>
 function Dashboard({ 
    wallet,      
   setwallet,   
   seedPhrase,
   setSeedPhrase,
   selectedNetwork}) {
-  const [balance, setBalance] = useState({
-    total: 42578.45,
-    bitcoin: 1.25,
-    ethereum: 15.73,
-    usdc: 25000
-  });
-  const Tokens = [
-    { 
-      name: 'Bitcoin', 
-      symbol: 'BTC', 
-      amount: 1.25, 
-      price: 34062.82, 
-      change: 2.45,
-      color: 'bg-orange-100',
-      borderColor: 'border-orange-500'
-    },
-    { 
-      name: 'Ethereum', 
-      symbol: 'ETH', 
-      amount: 15.73, 
-      price: 1876.54, 
-      change: -1.22,
-      color: 'bg-blue-100',
-      borderColor: 'border-blue-500'
-    },
-    { 
-      name: 'USDC', 
-      symbol: 'USDC', 
-      amount: 25000, 
-      price: 1, 
-      change: 0.01,
-      color: 'bg-purple-100',
-      borderColor: 'border-purple-500'
-    }
-  ];
-  
+
+    const [balance, setBalance] = useState({
+      total: 42578.45,
+      bitcoin: 1.25,
+      ethereum: 15.73,
+      usdc: 25000
+    });
+    
 
 const  navigate = useNavigate()
 
 const items = [
   { label: 'Transfer', key: '1' ,children: <>Transfer</>},
-  { label: 'Tokens', key: '2',children: <>{Tokens ? (
+  { label: 'Tokens', key: '2',children: <div className='max-h-96 overflow-auto'>{Tokens ? (
     <>
-    <List
-      bordered
-      itemLayout='Horizontal'
-      dataSource={Tokens}/>
-    </>  ):
+         <List
+     bordered
+      itemLayout="horizontal"
+      dataSource={Tokens}
+      renderItem={(item,index) => (
+        <List.Item
+          style={{textAlign: 'left'}}
+        >
+            <List.Item.Meta
+              avatar={<Avatar src={item.logo || logo} />}
+              title={item.symbol}
+              description={item.name}
+            />
+            <div>
+              {(Number(item.balance)
+              / 10 ** Number(item.decimals)).toFixed(2)}{""}
+              Tokens
+           
+
+              
+            </div>
+          
+        </List.Item>
+      )}
+    />
+
+    </>  
+    ):
     (
       <></>
-    )}
-    </> 
-    },
-  { label: 'NFTs', key: '3' ,children: <>NFTs</>},
+    )} </div> },
+  { label: 'NFTs', key: '3' ,children:   <div className='max-h-96 overflow-auto'>{nfts ? 
+    (<>
+      {nfts.map((e,i)=> {
+        return (
+          <>
+          {
+            e && (
+              <img key={i}
+              alt='nftimage'
+              src={e}/>
+            )
+          }
+          </>
+        )
+      })}
+    </>)
+      :
+   (<>
+   <span>You seem to not have any NFTs yet.</span>
+   <p>Find Alt coin Gems:{""}
+    <a href= "https://moralismoney.com/" target="_blank" rel="no_referrer">
+    moralis.money.io
+    </a>
+   </p>
+   </>)}
+  </div>},
 ];
 
 function logout(){
@@ -82,7 +130,7 @@ function logout(){
 }
   return (
     <div
-    className="flex items-center justify-center h-screen bg-gray-100"
+    className="flex items-center justify-center  bg-gray-100"
     style={{
         textAlign: 'center',
         padding: '20px',
@@ -90,6 +138,7 @@ function logout(){
 >
             <div className="space-y-5 mb-32 p-8 bg-white shadow-lg rounded-lg"
             style={{
+              maxHeight: "800px",
                 maxWidth: '400px',
                 width: '90%',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -101,10 +150,14 @@ function logout(){
 
               <div className='' >Wallet</div>
               <Tooltip title={wallet}>
+
+                <div>{wallet}</div>
                 <div>{wallet.slice(0,4)}....{wallet.slice(38)}</div>
               </Tooltip>
               <Divider></Divider>
+            
               <Tabs defaultActiveKey='1' items={items}></Tabs>
+          
             </div>
         </div>
   );
