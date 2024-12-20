@@ -1,8 +1,8 @@
-import express from 'express';
-import Moralis from "moralis"
-import cors from "cors"
-import dotenv from "dotenv"
-
+//import express from 'express';
+const cors = require('cors')
+const Moralis = require('moralis').default
+const express = require('express')
+const dotenv = require('dotenv')
 dotenv.config()
 const app = express()
 
@@ -15,27 +15,49 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/getTokens', async (req,res) => {
-    
+    try {
     const {userAddress, chain} = req.query
     const tokens = await Moralis.EvmApi.token.getWalletTokenBalances({
         "chain": chain,
         "address": userAddress
     })
+    
+    const nfts = await Moralis.EvmApi.nft.getWalletNFTs({
+        chain: chain,
+        address: userAddress,
+        mediaItems: true,
+    })
+    const txns = await Moralis.EvmApi.transaction.getWalletTransactions({
+        "chain": chain,
+        "order": "DESC",
+        "address": userAddress
+      });
 
     const jsonResponse = {
-        tokens: tokens.raw
+
+        tokens: tokens.raw,
+        nfts: nfts.raw,
+        txns: txns.raw,
+
     }
 
     return res.status(200).json(jsonResponse)
+    }
+    catch (e) {
+    console.error(e)
+    console.log("something went wrong")
+    return res.status(400).json({message: 'Internal Server Error'})
+    }
     
 })
 
-await Moralis.start({
+
+Moralis.start({
     apiKey: process.env.API_KEY,
 }).then((response) => {
     app.listen(port,() => {
         console.log('Moralis started successfully')
-        console.log( process.env.API_KEY)
+   
     })
     
 })

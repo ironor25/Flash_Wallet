@@ -7,7 +7,7 @@ import Dashboard from './components/Dashboard';
 import { Select } from 'antd';
 
 function CryptoWallet(){
-  const [selectedNetwork, setSelectedNetwork] = useState('0x1');
+  const [selectedNetwork, setSelectedNetwork] = useState('0xaa36a7');
   const [seedPhrase,setSeedPhrase] = useState(null)
   const [wallet,setWallet] = useState(null)
 
@@ -28,14 +28,16 @@ function CryptoWallet(){
         {/* Right Side - Network Selection */}
         <div className="relative">
           <Select
-            onChange={(val) => setSelectedNetwork(val)}
+            onChange={(value) => setSelectedNetwork(value)}
             value={selectedNetwork}
             options={[
-              { label: 'Ethereum', value: '0x1' },
+             
               { label: 'Sepolia Testnet', value: '0xaa36a7' },
+              { label: 'Ethereum', value: '0x1' },
               { label: 'Polygon', value: '0x89' },
               { label: 'Avalanche', value: '0xa86a' },
-              {label: "Polygon Amoy", value: '0x13882'}
+              {label: "Polygon Amoy", value: '0x13882'},
+              {label: "Optimism", value: '0xa'}
             ]}
             className="rounded-lg border-2 border-purple-600 w-52 text-center"
           >

@@ -1,8 +1,10 @@
 {
-  "name": ".env",
+  "name": "flash-wallet-server",
+  "description": "Server for the Flash Wallet",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
