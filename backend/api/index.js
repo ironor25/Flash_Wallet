@@ -16,11 +16,12 @@ app.use(cors());
 app.use(express.json());
 
 // Root route
-
+app.get('/', (req, res) => {
+    res.send('Server is running. Use /getTokens for API.');
+});
 
 // /getTokens route
-app.get('/', async (req, res) => {
-    res.send('Server is running. Use /getTokens for API.');
+app.get('/getTokens', async (req, res) => {
     try {
         const { userAddress, chain } = req.query;
 
