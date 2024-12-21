@@ -60,5 +60,6 @@ Moralis.start({
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
         console.log('Moralis started successfully');
+        console.log('API Key:', process.env.API_KEY);
     });
 });
