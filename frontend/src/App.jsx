@@ -16,7 +16,7 @@ function CryptoWallet(){
     <div className="min-h-screen flex flex-col"
     >
       {/* Header */}
-      <header className="flex justify-between items-center p-4 border-b border-gray-100 h-24">
+      <header className="flex justify-between items-center p-4 border-b h-24 ">
         {/* Left Side - Logo/Name */}
         <div className="flex items-center space-x-2">
           <div className="h-28">

@@ -1,6 +1,8 @@
 0x4272F0Ef638d41dE7A47DC0B5E887b65CC80fC5F
 rude problem until rule dirt wolf place because junior hungry focus powder
-
+broom write table below amateur balance only kidney when salute tragic idea
+flex items-center justify-center bg-gray-200 h-screen
+space-y-5 mb-32 p-8 bg-white shadow-lg rounded-lg
 import React, { useEffect,useState } from 'react';
 import { 
   Divider,

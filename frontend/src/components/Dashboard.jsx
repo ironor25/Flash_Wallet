@@ -13,6 +13,8 @@ import {
   QuestionCircleOutlined,
   ImportOutlined,
   ExportOutlined,
+  SendOutlined,
+  QrcodeOutlined
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -68,7 +70,7 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
       ) : transactions?.length ? (
         <List
           bordered
-          className='max-h-72 overflow-auto'
+          className='max-h-72 overflow-auto '
           itemLayout="horizontal"
           dataSource={transactions}
           renderItem={(item) => (
@@ -152,21 +154,32 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
   ];
 
   return (
-    <div className="flex items-center justify-center bg-gray-200 h-screen">
-      <div
-        className="space-y-5 mb-32 p-8 bg-white shadow-lg rounded-lg"
-        style={{ maxHeight: "600px", maxWidth: "400px", width: "90%" }}
-      >
-        <Button onClick={logout}>
-          Logout <LogoutOutlined />
-        </Button>
-        <div>Wallet</div>
-        <Tooltip title={wallet}>
-          <div>{wallet.slice(0, 4)}....{wallet.slice(-4)}</div>
-        </Tooltip>
-        <Divider />
-        <Tabs defaultActiveKey="1" items={items} />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 flex items-center justify-center p-4">
+
+       
+          <div
+            className=" text-whit bg-gradient-to-bl from-zinc-900 to-gray-700 rounded-2xl p-6 shadow-[0_0_15px_rgba(255,255,255,0.05)] border border-gray-800 relative overflow-hidden"
+            style={{ maxHeight: "600px", maxWidth: "400px", width: "90%" }}
+          >
+            
+            <div className="justify-between flex text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-6 mb-6 border
+             border-gray-800 shadow-inner">
+            <Tooltip title={wallet}>
+              <div>{wallet.slice(0, 4)}....{wallet.slice(-4)}</div>
+            </Tooltip>
+            <Button onClick={logout}>
+              Logout <LogoutOutlined />
+            </Button>
+            </div>
+            <div className="flex justify-center space-x-10">
+            <Button><SendOutlined />Send</Button>
+            <Button><QrcodeOutlined />Receive</Button>
+            </div>
+            <Divider />
+            <Tabs defaultActiveKey="1" items={items} className="text-white bg-white rounded-lg "/>
+          </div>
+    
+  
     </div>
   );
 };
