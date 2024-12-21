@@ -176,7 +176,7 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
             <Button><QrcodeOutlined />Receive</Button>
             </div>
             <Divider />
-            <Tabs defaultActiveKey="1" items={items} className="text-white bg-white rounded-lg "/>
+            <Tabs defaultActiveKey="1" items={items} className=""/>
           </div>
     
   
