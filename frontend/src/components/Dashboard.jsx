@@ -31,7 +31,7 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
   const getAssetAndHistory = async () => {
     setFetching(true);
     try {
-      const res = await axios.get(`http://localhost:3001/getTokens`, {
+      const res = await axios.get(`https://flash-wallet-syca.vercel.app/getTokens`, {
         params: { userAddress: wallet, chain: selectedNetwork },
       });
       const response = res.data;
