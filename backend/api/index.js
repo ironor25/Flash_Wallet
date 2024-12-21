@@ -12,7 +12,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+import cors from "cors";
+const corsOrigin ={
+    origin:'https://flash-wallet.vercel.app', //or whatever port your frontend is using
+    credentials:true,            
+    optionSuccessStatus:200
+}
+app.use(cors(corsOrigin));
 app.use(express.json());
 
 // Root route
