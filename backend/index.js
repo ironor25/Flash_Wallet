@@ -48,7 +48,7 @@ app.get('/getTokens', async (req, res) => {
 
         return res.status(200).json(jsonResponse);
     } catch (e) {
-        console.error(e.message);
+        console.error(e);
         return res.status(400).json({ message: 'Internal Server Error' });
     }
 });
