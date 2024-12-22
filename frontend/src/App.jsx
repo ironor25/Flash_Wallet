@@ -20,7 +20,7 @@ function CryptoWallet(){
         {/* Left Side - Logo/Name */}
         <div className="flex items-center space-x-2">
           <div className="h-28">
-            <img src="public\light.gif" alt="" className='ml-9 h-28 w-40' />
+            <img src="/light.gif" alt="" className='ml-9 h-28 w-40' />
           </div>
           {/* <span className="text-3xl font-bold text-gray-800">Wallet</span> */}
         </div>
