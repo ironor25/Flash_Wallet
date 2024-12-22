@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 
 const corsOrigin ={
-    origin:'https://flash-wallet.vercel.app', //or whatever port your frontend is using
+    origin:'*', //or whatever port your frontend is using
     credentials:true,            
     optionSuccessStatus:200
 }
