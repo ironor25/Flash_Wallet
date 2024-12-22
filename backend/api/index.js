@@ -13,12 +13,13 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 
-const corsOrigin ={
-    origin:'*', //or whatever port your frontend is using
-    credentials:true,            
-    optionSuccessStatus:200
-}
-app.use(cors(corsOrigin));
+// Configure CORS to allow access from any origin
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+    credentials: false // Set to false for public APIs without authentication
+}));
 app.use(express.json());
 
 // Root route
