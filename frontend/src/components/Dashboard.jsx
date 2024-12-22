@@ -63,7 +63,7 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
 
   const items = [
     {
-      label: "Transactions",
+      label: <span className="text-zinc-200">Transactions</span>,
       key: "1",
       children: fetching ? (
         <Spin />
@@ -74,10 +74,12 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
           itemLayout="horizontal"
           dataSource={transactions}
           renderItem={(item) => (
-            <List.Item>
+            <List.Item className="!border-zinc-800 hover:bg-zinc-900 transition-colors">
               <List.Item.Meta
                 avatar={
                   <Avatar
+                  className={item.from_address.toLowerCase() === wallet.toLowerCase() ? 
+                    "bg-red-500/10 text-red-500" : "bg-green-500/10 text-green-500"}
                     icon={
                       item.from_address.toLowerCase() === wallet.toLowerCase()
                         ? <ExportOutlined />
@@ -85,10 +87,10 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
                     }
                   />
                 }
-                title={item.block_timestamp.slice(0, 10)}
+                title={<span className="text-zinc-200">{item.block_timestamp.slice(0, 10)}</span>}
                 description={
                   item.from_address.toLowerCase() === wallet.toLowerCase() ? (
-                    <span className="text-red-600">
+                    <span className="text-red-500">
                       Sent {(item.value / 1e18).toFixed(2)} Sepolia ETH
                     </span>
                   ) : (
@@ -106,23 +108,27 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
       ),
     },
     {
-      label: "Tokens",
+      label: <span className="text-zinc-200">Tokens</span>,
       key: "2",
       children: fetching ? (
+        <div className="flex justify-center p-4">
         <Spin />
+      </div>
       ) : tokens?.length ? (
         <List
+         className="max-h-72 overflow-auto"
           bordered
           itemLayout="horizontal"
           dataSource={tokens}
           renderItem={(item) => (
-            <List.Item>
+            <List.Item className="!border-zinc-800 hover:bg-zinc-900 transition-colors">
               <List.Item.Meta
-                avatar={<Avatar src={item.logo || <QuestionCircleOutlined />} />}
-                title={item.symbol}
-                description={item.name}
+                avatar={<Avatar src={item.logo || <QuestionCircleOutlined />} 
+                className="bg-zinc-800"/>}
+                title={<span className="text-zinc-200">{item.symbol}</span>}
+                description={<span className="text-zinc-400">{item.name}</span>}
               />
-              <div>
+              <div className="text-zinc-200">
                 {(
                   Number(item.balance) /
                   10 ** Number(item.decimals)
@@ -133,11 +139,11 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
           )}
         />
       ) : (
-        <p>You seem to not have any tokens yet.</p>
+        <p className="text-zinc-400 text-center p-4">You seem to not have any tokens yet.</p>
       ),
     },
     {
-      label: "NFTs",
+      label:<span className="text-zinc-200">NFTs</span>,
       key: "3",
       children: fetching ? (
         <Spin />
@@ -148,35 +154,45 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
           </div>
         ))
       ) : (
-        <p>You seem to not have any NFTs yet.</p>
+        <p className="text-zinc-400 text-center p-4">You seem to not have any NFTs yet.</p>
       ),
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 flex items-center justify-center p-4">
-
-       
+    <div className="min-h-screen flex items-center justify-center p-4">
           <div
-            className=" text-whit bg-gradient-to-bl from-zinc-900 to-gray-700 rounded-2xl p-6 shadow-[0_0_15px_rgba(255,255,255,0.05)] border border-gray-800 relative overflow-hidden"
+            className="w-full max-w-md bg-gradient-to-b from-black via-gray-900 to-black rounded-2xl p-6 border border-zinc-800 shadow-lg"
             style={{ maxHeight: "600px", maxWidth: "400px", width: "90%" }}
           >
             
             <div className="justify-between flex text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-6 mb-6 border
              border-gray-800 shadow-inner">
             <Tooltip title={wallet}>
-              <div>{wallet.slice(0, 4)}....{wallet.slice(-4)}</div>
+            <span className="text-zinc-100 font-mono">
+              {wallet.slice(0, 4)}...{wallet.slice(-4)}
+            </span>
             </Tooltip>
-            <Button onClick={logout}>
+            <Button onClick={logout}
+            className="hover:text-white hover:bg-zinc-800">
               Logout <LogoutOutlined />
             </Button>
             </div>
             <div className="flex justify-center space-x-10">
-            <Button><SendOutlined />Send</Button>
-            <Button><QrcodeOutlined />Receive</Button>
+            <Button 
+            type="default"
+            className="bg-zinc-700 hover:bg-zinc-700 text-white border-none"><SendOutlined />Send</Button>
+            <Button
+            type="default"
+            className="bg-zinc-700 hover:bg-zinc-700 text-white border-none"
+            ><QrcodeOutlined />Receive</Button>
             </div>
-            <Divider />
-            <Tabs defaultActiveKey="1" items={items} className=""/>
+            <Divider  className="border-zinc-800"/>
+            <Tabs defaultActiveKey="1" items={items} 
+            className="text-white"
+            style={{
+            color: 'white',
+          }}/>
           </div>
     
   

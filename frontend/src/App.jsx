@@ -13,20 +13,14 @@ function CryptoWallet(){
 
 
   return (
-    <div className="min-h-screen flex flex-col"
-    >
-      {/* Header */}
-      <header className="flex justify-between items-center p-4 border-b h-24 ">
-        {/* Left Side - Logo/Name */}
-        <div className="flex items-center space-x-2">
-          <div className="h-28">
-            <img src="/light.gif" alt="" className='ml-9 h-28 w-40' />
-          </div>
-          {/* <span className="text-3xl font-bold text-gray-800">Wallet</span> */}
-        </div>
-
-        {/* Right Side - Network Selection */}
-        <div className="relative">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black flex flex-col">
+          {/* Header */}
+          <header className="py-6 bg-black/50 backdrop-blur-sm border-b border-gray-800">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <h1 className="text-3xl font-bold text-white tracking-wider">
+            Flash <span className="text-gray-400">Wallet</span>
+          </h1>
+         
           <Select
             onChange={(value) => setSelectedNetwork(value)}
             value={selectedNetwork}
@@ -39,13 +33,18 @@ function CryptoWallet(){
               {label: "Polygon Amoy", value: '0x13882'},
               {label: "Optimism", value: '0xa'}
             ]}
-            className="rounded-lg border-2 border-purple-600 w-52 text-center"
+            className="rounded-lg border-4 border-gray-800 w-52 text-center"
           >
 
 
           </Select>
+        
+        </div>
+        <div className="relative">
+          
         </div>
       </header>
+      
       {wallet && seedPhrase ?
       (<Routes>
         <Route path="/dashboard"  element={<Dashboard 

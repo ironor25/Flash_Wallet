@@ -21,34 +21,23 @@ function Create_page  ({setwallet, setseedPhrase}) {
     }
  
         return (
-            <div
-                className="flex items-center justify-center h-screen bg-gray-100"
-                style={{
-                    textAlign: 'center',
-                    padding: '20px',
-                }}
-            >
-                <div
-                    className="space-y-6 p-8 bg-white shadow-lg rounded-lg"
-                    style={{
-                        maxWidth: '400px',
-                        width: '90%',
-                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                        transition: 'box-shadow 0.3s ease',
-                    }}
-                >
-                    <div className="flex items-center space-x-4  border-2 rounded-md border-yellow-500 bg-yellow-100">
-                        <ExclamationCircleOutlined style={{ fontSize: '25px', color: '#fa8c16' }} />
-                        <div style={{ textAlign: 'left' }}>
-                            Once you generate the seed phrase, save it securely in order to recover your wallet.
-                        </div>
-                    </div>
+        <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black flex items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md space-y-6 bg-gray-900 rounded-2xl p-8 shadow-xl border border-gray-800">
+                 {/* Warning Box */}
+                 <div className="flex items-center space-x-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 text-left">
+                     <ExclamationCircleOutlined className="h-6 w-6 text-yellow-500 flex-shrink-0" />
+                        <p className="text-yellow-200 text-sm">
+                         Once you generate the seed phrase, save it securely in order to recover your wallet.
+                        </p>
+                 </div>
+
+
                     <Button
                         type="primary"
                         size="large"
-                        style={{
-                            width: '100%',
-                        }}
+                         className="w-full bg-white text-black py-3 rounded-lg font-semibold
+                   hover:bg-gray-100 transition-all duration-300
+                   shadow-lg hover:shadow-white/10"
                        onClick={() => generateWallet()}
                     >
                         Generate Seed Phrase
@@ -59,21 +48,21 @@ function Create_page  ({setwallet, setseedPhrase}) {
                             width: '100%',
                             transition: 'box-shadow 0.3s ease',
                         }}
-                        className="hover:shadow-xl"
+                        className="text-white border-white bg-slate-800"
                     >
                         {seedPhrase && <pre style={{whiteSpace: "pre-wrap"}}>{seedPhrase}</pre>}
                     </Card>
-                    <button
+                    <Button
                         type="primary"
                         size="large"
-                        style={{
-                            width: '100%',
-                        }}
-                        onClick={() =>{ setWalletAndMnemonic(); }}
-                         
+                        disabled={!seedPhrase}
+                         className="w-full bg-white text-black py-3 rounded-lg font-semibold
+                   hover:bg-gray-100 transition-all duration-300
+                   shadow-lg hover:shadow-white/10"
+                       onClick={() =>{ setWalletAndMnemonic(); }}
                     >
-                        Open Your wallet
-                    </button>
+                       Open Your wallet
+                    </Button>
                     <p
                         onClick={() => navigate('/')}
                         className="text-blue-500 cursor-pointer hover:underline"
