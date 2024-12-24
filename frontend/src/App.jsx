@@ -4,6 +4,8 @@ import Home from './components/home';
 import Create_page from './components/create_page';
 import Import_page from './components/import_page';
 import Dashboard from './components/Dashboard';
+import Receive from './components/receive';
+import Send from './components/send';
 import { Select } from 'antd';
 
 function CryptoWallet(){
@@ -54,6 +56,13 @@ function CryptoWallet(){
         setSeedPhrase    = {setSeedPhrase}
         selectedNetwork  = {selectedNetwork}
         />} />
+        <Route path="/receive" element={<Receive 
+        wallet = {wallet}
+        />} />
+        <Route path="/send" element={<Send 
+        wallet = {wallet}
+        selectedNetwork =  {selectedNetwork}
+        seedPhrase = {seedPhrase}/>} />
       </Routes>
       ) :
      ( <Routes>

@@ -31,6 +31,8 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
   const getAssetAndHistory = async () => {
     setFetching(true);
     try {
+      //http://localhost:3000/getTokens
+      //https://flash-wallet.vercel.app/getTokens
       const res = await axios.get(`https://flash-wallet.vercel.app/getTokens`, {
         params: { userAddress: wallet, chain: selectedNetwork },
       });
@@ -39,7 +41,7 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
       setTokens(response.tokens || []);
       setUserNfts(response.nfts || []);
       setTransactions(response.txns.result || []);
-      setBalance(response.balance || 0);
+      setBalance(response.native_balance || 0);
     } catch (error) {
       console.error("Error fetching assets:", error);
     } finally {
@@ -163,28 +165,33 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
     <div className="min-h-screen flex items-center justify-center p-4">
           <div
             className="w-full max-w-md bg-gradient-to-b from-black via-gray-900 to-black rounded-2xl p-6 border border-zinc-800 shadow-lg"
-            style={{ maxHeight: "600px", maxWidth: "400px", width: "90%" }}
+            style={{ maxHeight: "700px", maxWidth: "400px", width: "90%" }}
           >
             
-            <div className="justify-between flex text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-6 mb-6 border
+            <div className="flex justify-between text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl p-6 mb-6 border
              border-gray-800 shadow-inner">
             <Tooltip title={wallet}>
+              
             <span className="text-zinc-100 font-mono">
-              {wallet.slice(0, 4)}...{wallet.slice(-4)}
+            {`Balance: ${(balance.balance / 1e18).toFixed(1)}`}<br />
+             { `Address: ${wallet.slice(0, 4)}...${wallet.slice(-4)}`}
+              
             </span>
+            <br />
             </Tooltip>
-            <Button onClick={logout}
-            className="hover:text-white hover:bg-zinc-800">
-              Logout <LogoutOutlined />
-            </Button>
+           
+           
             </div>
             <div className="flex justify-center space-x-10">
             <Button 
             type="default"
-            className="bg-zinc-700 hover:bg-zinc-700 text-white border-none"><SendOutlined />Send</Button>
+            className="bg-zinc-700 hover:bg-zinc-700 text-white border-none"
+            onClick={() => navigate("/send")}>
+            <SendOutlined />Send</Button>
             <Button
             type="default"
             className="bg-zinc-700 hover:bg-zinc-700 text-white border-none"
+            onClick={() => navigate("/receive")}
             ><QrcodeOutlined />Receive</Button>
             </div>
             <Divider  className="border-zinc-800"/>
@@ -193,8 +200,15 @@ const Dashboard = ({ wallet, setwallet, seedPhrase, setSeedPhrase, selectedNetwo
             style={{
             color: 'white',
           }}/>
+          <div className="justify-center flex">          
+             <Button onClick={logout}
+            className="hover:text-white hover:bg-zinc-800 items-center  mt-4">
+              Logout <LogoutOutlined />
+            </Button>
+            </div>
+
           </div>
-    
+          
   
     </div>
   );

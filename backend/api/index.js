@@ -58,6 +58,11 @@ app.get('/getTokens', async (req, res) => {
             address: userAddress,
             order: 'DESC',
         });
+        //Fetch Wallet native balance
+        const native_balance = await Moralis.EvmApi.balance.getNativeBalance({
+            chain,
+            "address": userAddress,
+          });
 
         console.log('Data fetched successfully:', { tokens: tokens.raw.length, nfts: nfts.raw.length, txns: txns.raw.length });
 
@@ -66,6 +71,7 @@ app.get('/getTokens', async (req, res) => {
             tokens: tokens.raw,
             nfts: nfts.raw,
             txns: txns.raw,
+            native_balance: native_balance.raw
         });
     } catch (error) {
         console.error('Error in /getTokens:', error.message);
