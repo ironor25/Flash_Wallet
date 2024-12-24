@@ -6,15 +6,15 @@ import { Chains_Config } from '../chain';
 import {ethers} from 'ethers';
 
 
-const [sendToAddress, setSendToAddress] = useState(null);
-const [amountToSend, setAmountToSend] = useState(null);
-const [processing, setProcessing] = useState(false);
-const [hash, setHash] = useState(null);
+
 
 function Send(wallet,selectedNetwork,seedPhrase) {
     const navigate = useNavigate();
 
-
+    const [sendToAddress, setSendToAddress] = useState(null);
+    const [amountToSend, setAmountToSend] = useState(null);
+    const [processing, setProcessing] = useState(false);
+    const [hash, setHash] = useState(null);
     async function sendCrypto(to , amount){
         const chain =  Chains_Config[selectedNetwork]   
         const provider = new ethers.providers.JsonRpcProvider(chain.rpcUrl);
@@ -61,7 +61,7 @@ function Send(wallet,selectedNetwork,seedPhrase) {
                     <label className="text-zinc-100 font-mono">Recipient Address</label>
                     <input type="text" 
                     value={sendToAddress}
-                    onChange={(e) => setSendToAddress(e.target.value)}
+                   // onChange={(e) => setSendToAddress(e.target.value)}
                     className="bg-gray-800 border border-zinc-800 rounded p-2 text-zinc-100 font-mono" 
                     placeholder="Enter receiver's address"/>
                 </div>
@@ -69,7 +69,7 @@ function Send(wallet,selectedNetwork,seedPhrase) {
                     <label className="text-zinc-100 font-mono">Amount</label>
                     <input type="text" 
                     value={amountToSend}
-                    onChange={(e) => setAmountToSend(e.target.value)}
+                    //onChange={(e) => setAmountToSend(e.target.value)}
                     className="bg-gray-800 border border-zinc-800 rounded p-2 text-zinc-100 font-mono"
                     placeholder="Enter crypto amount" />
                 </div>
@@ -79,10 +79,10 @@ function Send(wallet,selectedNetwork,seedPhrase) {
             className="bg-zinc-400 hover:bg-zinc-700 text-black border-none ml-24"
            >
             <SendOutlined />Send</Button>
-            {processing && <>  
-            
-             </>}
+            <br />
+            Feature Coming Soon ........
             </div>
+            
             <p
          onClick={() => navigate('/dashboard')}
          className="text-blue-500 cursor-pointer hover:underline"
