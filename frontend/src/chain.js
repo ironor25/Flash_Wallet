@@ -15,3 +15,4 @@ export const Chains_Config = {
     "0xaa36a7": SepoliaETH,
     "0x13882": PolygonAmoyTestnet
 };
+export default Chains_Config;
